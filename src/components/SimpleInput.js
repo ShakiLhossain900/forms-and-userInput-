@@ -7,12 +7,12 @@ const nameInputChangeHandler = (event) => {
      setEnerdName(event.target.value);
 }
 
-const formSubmitHandler = (event) =>{
+const formSubmissionHandler = (event) =>{
     event.preventDefault();
 }
 
     return (
-        <form onSubmit={formSubmitHandler}>
+        <form onSubmit={formSubmissionHandler}>
             <div className='form-control'>
                 <label htmlFor="name">Your name</label>
                 <input type="text" id="name" onChange={nameInputChangeHandler}/>
