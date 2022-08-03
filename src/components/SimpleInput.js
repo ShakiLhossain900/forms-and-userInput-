@@ -4,7 +4,7 @@ const SimpleInput = (props) => {
   const nameInputRef = useRef();
 
   const [enterdName, setEnerdName] = useState("");
-  const [ensteredNameIsValid, setEnterdNameIsValid] = useState(false);
+  const [ensteredNameIsValid, setEnterdNameIsValid] = useState(true);
 
   const nameInputChangeHandler = (event) => {
     setEnerdName(event.target.value);
@@ -30,9 +30,11 @@ const SimpleInput = (props) => {
     setEnerdName('')
   };
 
+  const nameInputClassess = ensteredNameIsValid ? 'form-control' : 'form-control invalid';
+
   return (
     <form onSubmit={formSubmissionHandler}>
-      <div className="form-control">
+      <div className={nameInputClassess}>
         <label htmlFor="name">Your name</label>
         <input
           ref={nameInputRef}
@@ -41,7 +43,7 @@ const SimpleInput = (props) => {
           value={enterdName}
           onChange={nameInputChangeHandler}
         />
-        {!ensteredNameIsValid && <p>Name must not be empty. </p>}
+        {!ensteredNameIsValid && <p  className="error-text">Name must not be empty. </p>}
       </div>
       <div className="form-actions">
         <button>Submit</button>
