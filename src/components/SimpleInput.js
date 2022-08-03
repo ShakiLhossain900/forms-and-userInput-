@@ -8,10 +8,6 @@ const SimpleInput = (props) => {
 
   const [enteredNameTouched, setEnerdNameTouched] = useState(false);
 
-  const nameInputBlurHandler =(wvent)=>{
-
-  }
-
   useEffect(() => {
     if (ensteredNameIsValid) {
       console.log("Name Input is Valid!");
@@ -20,6 +16,15 @@ const SimpleInput = (props) => {
 
   const nameInputChangeHandler = (event) => {
     setEnerdName(event.target.value);
+  };
+
+  const nameInputBlurHandler = (event) => {
+    setEnerdNameTouched(true);
+
+    if (enterdName.trim() === "") {
+      setEnterdNameIsValid(false);
+      return;
+    }
   };
 
   const formSubmissionHandler = (event) => {
