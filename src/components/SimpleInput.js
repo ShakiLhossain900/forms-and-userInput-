@@ -13,24 +13,25 @@ const SimpleInput = (props) => {
   const formSubmissionHandler = (event) => {
     event.preventDefault();
 
-    if(enterdName.trim() === ''){
-      setEnterdNameIsValid(false)
+    if (enterdName.trim() === "") {
+      setEnterdNameIsValid(false);
       return;
     }
 
-    setEnterdNameIsValid(true)
+    setEnterdNameIsValid(true);
 
     console.log(enterdName);
     const enteredValue = nameInputRef.current.value;
     console.log(enteredValue);
 
-
-   // nameInputRef.current.value = ' ';   NOT IDEAL, DON'T MANIPULATE THE DOM      
-   //manipulate means handle or control
-    setEnerdName('')
+    // nameInputRef.current.value = ' ';   NOT IDEAL, DON'T MANIPULATE THE DOM
+    //manipulate means handle or control
+    setEnerdName("");
   };
 
-  const nameInputClassess = ensteredNameIsValid ? 'form-control' : 'form-control invalid';
+  const nameInputClassess = ensteredNameIsValid
+    ? "form-control"
+    : "form-control invalid";
 
   return (
     <form onSubmit={formSubmissionHandler}>
@@ -43,7 +44,9 @@ const SimpleInput = (props) => {
           value={enterdName}
           onChange={nameInputChangeHandler}
         />
-        {!ensteredNameIsValid && <p  className="error-text">Name must not be empty. </p>}
+        {!ensteredNameIsValid && (
+          <p className="error-text">Name must not be empty. </p>
+        )}
       </div>
       <div className="form-actions">
         <button>Submit</button>
