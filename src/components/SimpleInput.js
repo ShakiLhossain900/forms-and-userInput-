@@ -7,12 +7,16 @@ const SimpleInput = (props) => {
   const [ensteredNameIsValid, setEnterdNameIsValid] = useState(false);
 
   const [enteredNameTouched, setEnerdNameTouched] = useState(false);
- 
+
+  const nameInputBlurHandler =(wvent)=>{
+
+  }
+
   useEffect(() => {
-   if (ensteredNameIsValid) {
-    console.log('Name Input is Valid!');
-   }
-  },[ensteredNameIsValid]);
+    if (ensteredNameIsValid) {
+      console.log("Name Input is Valid!");
+    }
+  }, [ensteredNameIsValid]);
 
   const nameInputChangeHandler = (event) => {
     setEnerdName(event.target.value);
@@ -21,8 +25,7 @@ const SimpleInput = (props) => {
   const formSubmissionHandler = (event) => {
     event.preventDefault();
 
-
-    setEnerdNameTouched(true)
+    setEnerdNameTouched(true);
 
     if (enterdName.trim() === "") {
       setEnterdNameIsValid(false);
@@ -40,7 +43,7 @@ const SimpleInput = (props) => {
     setEnerdName("");
   };
 
-const nameInputIsInValid =!ensteredNameIsValid && enteredNameTouched;
+  const nameInputIsInValid = !ensteredNameIsValid && enteredNameTouched;
 
   const nameInputClassess = nameInputIsInValid
     ? "form-control invalid"
@@ -54,6 +57,7 @@ const nameInputIsInValid =!ensteredNameIsValid && enteredNameTouched;
           ref={nameInputRef}
           type="text"
           id="name"
+          onBlur={nameInputBlurHandler}
           value={enterdName}
           onChange={nameInputChangeHandler}
         />
