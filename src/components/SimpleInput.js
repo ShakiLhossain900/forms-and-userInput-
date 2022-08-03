@@ -5,7 +5,6 @@ const SimpleInput = (props) => {
 
   const [enterdName, setEnerdName] = useState("");
   const [ensteredNameIsValid, setEnterdNameIsValid] = useState(false);
-
   const [enteredNameTouched, setEnerdNameTouched] = useState(false);
 
   useEffect(() => {
@@ -16,14 +15,16 @@ const SimpleInput = (props) => {
 
   const nameInputChangeHandler = (event) => {
     setEnerdName(event.target.value);
+    if (enterdName.trim() !== "") {
+      setEnterdNameIsValid(true);
+    }
   };
 
   const nameInputBlurHandler = (event) => {
     setEnerdNameTouched(true);
 
-    if (enterdName.trim() === "") {
+    if (enterdName.trim() === " ") {
       setEnterdNameIsValid(false);
-      return;
     }
   };
 
