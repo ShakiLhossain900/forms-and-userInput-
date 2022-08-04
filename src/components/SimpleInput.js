@@ -79,49 +79,68 @@
 // };
 // export default SimpleInput;
 
-
-/// THE UPPER  ONE  IS THE PREVIOUS LOGIC AND THE DOWN ONE THE NEW LOGIC TO REMOVE THE CODE  LENGTH 
+/// THE UPPER  ONE  IS THE PREVIOUS LOGIC AND THE DOWN ONE THE NEW LOGIC TO REMOVE THE CODE  LENGTH
 //BUT IT WILL WORK AS THE SAME AS BEFORE
-
 
 import { useState } from "react";
 
 const SimpleInput = (props) => {
-  const [enteredName, setEneredName] = useState('');
+  const [enteredName, setEneredName] = useState("");
   const [enteredNameTouched, setEnerdNameTouched] = useState(false);
 
-const enteredNameIsValid = enteredName.trim() !== '';
-const nameInputIsInValid = !enteredNameIsValid && enteredNameTouched;
+  //this 2 state and logic only for one input if there is more than one we need to do
+  //const [formIsValid, setFormIsValid] = useState(false);
 
-const nameInputChangeHandler = (event) => {
+  const enteredNameIsValid = enteredName.trim() !== "";
+  const nameInputIsInValid = !enteredNameIsValid && enteredNameTouched;
+
+  //using useEffect more than none input for logic also
+  // useEffect(() => {
+  //   if(enteredNameIsValid ){
+  //     setFormIsValid(true)
+  //   }
+  //   else{
+  //     setFormIsValid(false)
+  //   }
+  // }, [enteredNameIsValid]);
+
+  //useEffect use hook use kora lagbe na multiple form validity check kortece karon atay kno side effect nai
+ let formIsValid = false;
+ 
+ if(enteredNameIsValid){
+  formIsValid = true;
+ }
+
+
+  const nameInputChangeHandler = (event) => {
     setEneredName(event.target.value);
-};
+  };
 
-const nameInputBlurHandler = (event) => {
-  setEnerdNameTouched(true);
-}
+  const nameInputBlurHandler = (event) => {
+    setEnerdNameTouched(true);
+  };
 
-const formSubmissionHandler = event => {
-  event.preventDefault();
+  const formSubmissionHandler = (event) => {
+    event.preventDefault();
 
+    setEnerdNameTouched(true);
 
-  setEnerdNameTouched(true);
+    if (!enteredNameIsValid) {
+      return;
+    }
 
-   if(!enteredNameIsValid){
-     return;
-   }
+    console.log(enteredName);
 
-   console.log(enteredName);
+    setEneredName("");
+    setEnerdNameTouched(false);
+  };
 
-   setEneredName('');
-   setEnerdNameTouched(false);
-}
+  const nameInputClassess = nameInputIsInValid
+    ? "form-control invalid"
+    : "form-control";
 
-const nameInputClassess = nameInputIsInValid ? 'form-control invalid' : 'form-control'
-
-//hey allah! help me allah help me allah help me allah help me allah help me allah help
-//allah tomk code er vitor tomk dakteci allah amak tomi help koro allah takar ovab mone hocce allah help me
-
+  //hey allah! help me allah help me allah help me allah help me allah help me allah help
+  //allah tomk code er vitor tomk dakteci allah amak tomi help koro allah takar ovab mone hocce allah help me
 
   return (
     <form onSubmit={formSubmissionHandler}>
@@ -139,10 +158,9 @@ const nameInputClassess = nameInputIsInValid ? 'form-control invalid' : 'form-co
         )}
       </div>
       <div className="form-actions">
-        <button>Submit</button>
+        <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
   );
 };
 export default SimpleInput;
-
