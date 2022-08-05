@@ -12,7 +12,7 @@ const BasicForm = () => {
 
   let formIsValid = false;
   if (enteredFirstNameIsValid) {
-    formIsValid = true;
+    formIsValid  = true;
   }
 
   const formSubmissionHandler = (event) => {
@@ -50,8 +50,8 @@ const BasicForm = () => {
           <label htmlFor="name">E-Mail Address</label>
           <input type="text" id="name" />
         </div>
-        <div>
-          <button>Submit</button>
+        <div className="form-actions">
+          <button disabled={!formIsValid}>Submit</button>
         </div>
       </div>
     </form>
