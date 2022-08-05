@@ -98,6 +98,9 @@ const SimpleInput = (props) => {
   const enteredNameIsValid = enteredName.trim() !== "";
   const nameInputIsInValid = !enteredNameIsValid && enteredNameTouched;
 
+  const enteredEmailIsValid = enteredEmail.includes("@");
+  const emailInputIsInValid = !enteredEmailIsValid && enteredEmailTouched;
+
   //using useEffect more than none input for logic also
   // useEffect(() => {
   //   if(enteredNameIsValid ){
@@ -111,15 +114,21 @@ const SimpleInput = (props) => {
   //useEffect use hook use kora lagbe na multiple form validity check kortece karon atay kno side effect nai
   let formIsValid = false;
 
-  if (enteredNameIsValid) {
+  if (enteredNameIsValid && enteredEmailIsValid) {
     formIsValid = true;
   }
 
   const nameInputChangeHandler = (event) => {
     setEneredName(event.target.value);
   };
+  const emailInputChangeHandler = (event) => {
+    setEnteredEmail(event.target.value);
+  };
 
   const nameInputBlurHandler = (event) => {
+    setEnerdNameTouched(true);
+  };
+  const emailInputBlurHandler = (event) => {
     setEnerdNameTouched(true);
   };
 
@@ -127,18 +136,25 @@ const SimpleInput = (props) => {
     event.preventDefault();
 
     setEnerdNameTouched(true);
+    setEnteredEmailTouched(true);
 
     if (!enteredNameIsValid) {
       return;
     }
 
     console.log(enteredName);
+    console.log(enteredEmail);
 
     setEneredName("");
+    setEnteredEmail("");
     setEnerdNameTouched(false);
+    setEnteredEmailTouched(false);
   };
 
   const nameInputClassess = nameInputIsInValid
+    ? "form-control invalid"
+    : "form-control";
+  const emailInputClasses = emailInputIsInValid
     ? "form-control invalid"
     : "form-control";
 
@@ -161,14 +177,17 @@ const SimpleInput = (props) => {
         )}
       </div>
       <div className={emailInputClasses}>
-      <label htmlFor="email">Your Email</label>
+        <label htmlFor="email">Your Email</label>
         <input
           type="email"
           name="email"
           onBlur={emailInputBlurHandler}
           value={enteredEmail}
           onChange={emailInputChangeHandler}
-       />
+        />
+        {emailInputIsInValid && (
+          <p className="error-text">Please enter a valid email</p>
+        )}
       </div>
       <div className="form-actions">
         <button disabled={!formIsValid}>Submit</button>
