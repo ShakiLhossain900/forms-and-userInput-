@@ -206,7 +206,7 @@ import useInput from "../hooks/use-input";
 const SimpleInput = (props) => {
   const {
     value: enteredName,
-    isValid: enteredNameIsValid, //alis
+    isValid: enteredNameIsValid, //alias 
     hasError: nameInputHasError,
     valueChangeHandler: nameChangeHandler,
     inputBlurHandler: nameBlurHandler,
