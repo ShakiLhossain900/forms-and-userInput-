@@ -20,9 +20,17 @@ const BasicForm = () => {
     inputBlurHandler: LastNameBlurHandler,
     reset: resetLastNameNameInput,
   } = useInput((value) => value.trim() !== "");
+  const {
+    value: enteredEmail,
+    isValid: enteredEmailIsValid,
+    hasError: emailInputHasError,
+    valueChangeHandler: emailChangeHandler,
+    inputBlurHandler: emailBlurHandler,
+    reset: resetEmailInput,
+  } = useInput((value) => value.includes("@"));
 
   let formIsValid = false;
-  if (enteredFirstNameIsValid && enteredLastNameIsValid) {
+  if (enteredFirstNameIsValid && enteredLastNameIsValid && enteredEmailIsValid) {
     formIsValid = true;
   }
 
@@ -30,14 +38,19 @@ const BasicForm = () => {
     event.preventDefault();
 
     console.log(enteredFirstName);
+    
     resetLastNameNameInput();
     resetfirstNameNameInput();
+    resetEmailInput();
   };
 
   const firstNameInputClasses = firstNameInputHasError
     ? "form-control invalid"
     : "form-control";
   const lastNameInputClasses = lastNameInputHasError
+    ? "form-control invalid"
+    : "form-control";
+    const emailInputClasses = emailInputHasError
     ? "form-control invalid"
     : "form-control";
 
@@ -70,10 +83,19 @@ const BasicForm = () => {
             <p className="error-text"> last name must not be empty!!</p>
           )}
         </div>
-        <div className="form-control">
-          <label htmlFor="name">E-Mail Address</label>
-          <input type="text" id="name" />
-        </div>
+        <div className={emailInputClasses}>
+        <label htmlFor="email">E-mail</label>
+        <input
+          type="email"
+          name="email"
+          onBlur={emailBlurHandler}
+          value={enteredEmail}
+          onChange={emailChangeHandler}
+        />
+        {emailInputHasError && (
+          <p className="error-text">Please enter a valid email</p>
+        )}
+      </div>
         <div className="form-actions">
           <button disabled={!formIsValid}>Submit</button>
         </div>
