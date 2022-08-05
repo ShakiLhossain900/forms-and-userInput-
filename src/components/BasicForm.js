@@ -1,3 +1,5 @@
+//assignemnet solution
+
 import React from "react";
 import useInput from "../hooks/use-input";
 const BasicForm = () => {
@@ -10,19 +12,32 @@ const BasicForm = () => {
     reset: resetfirstNameNameInput,
   } = useInput((value) => value.trim() !== "");
 
+  const {
+    value: enteredLastName,
+    isValid: enteredLastNameIsValid,
+    hasError: lastNameInputHasError,
+    valueChangeHandler: LastNameChangeHandler,
+    inputBlurHandler: LastNameBlurHandler,
+    reset: resetLastNameNameInput,
+  } = useInput((value) => value.trim() !== "");
+
   let formIsValid = false;
-  if (enteredFirstNameIsValid) {
-    formIsValid  = true;
+  if (enteredFirstNameIsValid && enteredLastNameIsValid) {
+    formIsValid = true;
   }
 
   const formSubmissionHandler = (event) => {
     event.preventDefault();
 
     console.log(enteredFirstName);
+    resetLastNameNameInput();
     resetfirstNameNameInput();
   };
 
   const firstNameInputClasses = firstNameInputHasError
+    ? "form-control invalid"
+    : "form-control";
+  const lastNameInputClasses = lastNameInputHasError
     ? "form-control invalid"
     : "form-control";
 
@@ -39,12 +54,21 @@ const BasicForm = () => {
             onChange={fistNameChangeHandler}
           />
           {firstNameInputHasError && (
-            <p className="error-text">name must not be empty!!</p>
+            <p className="error-text">first name must not be empty!!</p>
           )}
         </div>
-        <div className="form-control">
+        <div className={lastNameInputClasses}>
           <label htmlFor="name">Last Name</label>
-          <input type="text" id="name" />
+          <input
+           type="text" 
+           id="name" 
+           onBlur={LastNameBlurHandler}
+           value={enteredLastName}
+           onChange={LastNameChangeHandler}
+           />
+            {lastNameInputHasError && (
+            <p className="error-text"> last name must not be empty!!</p>
+          )}
         </div>
         <div className="form-control">
           <label htmlFor="name">E-Mail Address</label>
