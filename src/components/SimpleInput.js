@@ -80,6 +80,7 @@
 // export default SimpleInput;
 
 /// THE UPPER  ONE  IS THE PREVIOUS LOGIC AND THE DOWN ONE THE NEW LOGIC TO REMOVE THE CODE  LENGTH
+
 //BUT IT WILL WORK AS THE SAME AS BEFORE
 
 import { useState } from "react";
@@ -87,6 +88,9 @@ import { useState } from "react";
 const SimpleInput = (props) => {
   const [enteredName, setEneredName] = useState("");
   const [enteredNameTouched, setEnerdNameTouched] = useState(false);
+
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
 
   //this 2 state and logic only for one input if there is more than one we need to do
   //const [formIsValid, setFormIsValid] = useState(false);
@@ -105,12 +109,11 @@ const SimpleInput = (props) => {
   // }, [enteredNameIsValid]);
 
   //useEffect use hook use kora lagbe na multiple form validity check kortece karon atay kno side effect nai
- let formIsValid = false;
- 
- if(enteredNameIsValid){
-  formIsValid = true;
- }
+  let formIsValid = false;
 
+  if (enteredNameIsValid) {
+    formIsValid = true;
+  }
 
   const nameInputChangeHandler = (event) => {
     setEneredName(event.target.value);
@@ -156,6 +159,8 @@ const SimpleInput = (props) => {
         {nameInputIsInValid && (
           <p className="error-text">Name must not be empty. </p>
         )}
+        <label htmlFor="email">Your Email</label>
+        <input type="email" name="email" />
       </div>
       <div className="form-actions">
         <button disabled={!formIsValid}>Submit</button>
