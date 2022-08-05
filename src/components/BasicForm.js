@@ -38,7 +38,8 @@ const BasicForm = () => {
     event.preventDefault();
 
     console.log(enteredFirstName);
-    
+    console.log(enteredLastName);
+    console.log(enteredEmail);
     resetLastNameNameInput();
     resetfirstNameNameInput();
     resetEmailInput();
